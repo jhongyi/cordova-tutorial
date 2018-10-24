@@ -1,0 +1,101 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+var app = {
+    // Application Constructor
+    initialize: function () {
+        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+    },
+    onDeviceReady: function () {
+        document.getElementById('image-picker-btn').addEventListener("click", imagePicker);
+        document.getElementById('camera-btn').addEventListener("click", camera);
+        document.getElementById('push-notification-btn').addEventListener("click", pushNotification);
+        window.FirebasePlugin.getToken(function(token) {
+            document.getElementById('device-token').value = token;
+        }, function(error) {
+            console.error(error);
+        });
+    }
+};
+
+app.initialize();
+
+function imagePicker() {
+    navigator.camera.getPicture(onSuccess, onFail, {
+        quality: 50,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        encodingType: Camera.EncodingType.PNG,
+        mediaType: Camera.MediaType.PICTURE,
+        targetWidth: 300,
+        targetHeight: 300
+    });
+}
+
+function camera() {
+    navigator.camera.getPicture(onSuccess, onFail, {
+        quality: 50,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        encodingType: Camera.EncodingType.PNG,
+        mediaType: Camera.MediaType.PICTURE,
+        targetWidth: 300,
+        targetHeight: 300
+    });
+}
+
+function onSuccess(imageURL) {
+    var image = document.getElementById('picker-image');
+    image.src = imageURL;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+
+function pushNotification() {
+    var token = document.getElementById('device-token').value;
+    var notificationTitle = document.getElementById('notification-title').value;
+    var notificationMessage = document.getElementById('notification-message').value;
+    $.ajax({
+        url: "https://fcm.googleapis.com/fcm/send",
+        method: "POST",
+        contentType: 'application/json',
+        dataType: 'json',
+        headers: {
+            Authorization: 'key=AAAARqVLjFg:APA91bFwjB6ETZNKckggszMJuqDNBnBWIOBS8vWw814_Z8MUS0FGnGWk1Ej1CxiYiIz9IJVj0Eqlw6Fcusj6FGn-5D-kJ7IPvypEvh1F39XMxy_QzHSS1irssgIFuzPut8F6sR2JV4Mb'
+        },
+        data: JSON.stringify({
+            to: token,
+            data: {
+              title: notificationTitle,
+              body: notificationMessage
+            },
+            notification: {
+                title: notificationTitle,
+                body: notificationMessage
+            }
+        })
+    })
+    .done(function(response) {
+        alert('發送成功');
+    })
+    .fail(function () {
+        alert('發送失敗');
+    });
+}

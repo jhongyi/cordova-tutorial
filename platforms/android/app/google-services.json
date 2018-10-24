@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "303420902488",
+    "firebase_url": "https://cordova-tutorial-notification.firebaseio.com",
+    "project_id": "cordova-tutorial-notification",
+    "storage_bucket": "cordova-tutorial-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303420902488:android:13dda83ddc433065",
+        "android_client_info": {
+          "package_name": "com.cordova.tutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303420902488-h6q6gk28ra0pfbg9caff8e22iip78dqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtkNaXbhZu2llt9SwmLU7d6yBwnYWN7MU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
