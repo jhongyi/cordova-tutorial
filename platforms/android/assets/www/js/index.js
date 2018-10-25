@@ -30,6 +30,12 @@ var app = {
         }, function(error) {
             console.error(error);
         });
+        window.FirebasePlugin.onNotificationOpen(function (notification) {
+            alert(notification.title);
+            alert(notification.body);
+        }, function (error) {
+            console.error(error);
+        });
     }
 };
 
@@ -83,8 +89,8 @@ function pushNotification() {
         data: JSON.stringify({
             to: token,
             data: {
-              title: notificationTitle,
-              body: notificationMessage
+              title: 'data title!',
+              body: 'data body!'
             },
             notification: {
                 title: notificationTitle,

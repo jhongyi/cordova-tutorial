@@ -30,6 +30,12 @@ var app = {
         }, function(error) {
             console.error(error);
         });
+        window.FirebasePlugin.onNotificationOpen(function (notification) {
+            alert(notification.title);
+            alert(notification.body);
+        }, function (error) {
+            console.error(error);
+        });
     }
 };
 
@@ -78,7 +84,7 @@ function pushNotification() {
         contentType: 'application/json',
         dataType: 'json',
         headers: {
-            Authorization: 'key='
+            Authorization: 'key=AAAARqVLjFg:APA91bH1cq5dtrRfydxZ2r7ThNXKd-KmfkuM3-PkX5ZDRAT3UBF6mIkWFllnVKRG_5cEpjGGUb8S40zqcja32_voc3YGo2pJm1inA-RHmRi4HKhcIA0QjUwm7Y3mJfChi6IdCMrhnvUD'
         },
         data: JSON.stringify({
             to: token,
