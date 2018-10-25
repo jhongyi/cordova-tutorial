@@ -78,7 +78,7 @@ function pushNotification() {
         contentType: 'application/json',
         dataType: 'json',
         headers: {
-            Authorization: 'key=AAAARqVLjFg:APA91bFwjB6ETZNKckggszMJuqDNBnBWIOBS8vWw814_Z8MUS0FGnGWk1Ej1CxiYiIz9IJVj0Eqlw6Fcusj6FGn-5D-kJ7IPvypEvh1F39XMxy_QzHSS1irssgIFuzPut8F6sR2JV4Mb'
+            Authorization: 'key='
         },
         data: JSON.stringify({
             to: token,
